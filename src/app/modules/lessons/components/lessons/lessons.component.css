@@ -1,0 +1,19 @@
+*{
+    margin: 0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+.container{
+    min-height: 80vh;
+    background-color: #fafafa;
+    box-shadow: 0 4px 8px 0 rgb(53 105 128 / 30%), 0 6px 20px 0 rgb(165 200 213 / 41%);
+    display: flex;
+    justify-content:space-around;
+}
+
+.side-panel{
+    border-right: solid 1px;
+    margin-right: 10%;
+    
+}

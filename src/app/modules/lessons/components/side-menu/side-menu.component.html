@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <div class="container" [style.min-width]="minwidth" >
+    <cdk-accordion class="example-accordion" [style.width]="hidesidemenu">
+      <i class="fa-sharp fa-solid fa-circle-xmark fa-lg" 
+      [style.display]="hidecirclemark"
+      (click)="hideSideMenu()"></i>
+      <i class="fa-solid fa-chevron-right fa-lg" [style.display]="hidechevrons"
+      (click)="openSideMenu()"></i>
+      <cdk-accordion-item *ngFor="let lessonList of lessonArray; let index = index;" #accordionItem="cdkAccordionItem"
+        class="example-accordion-item"[style.display]="hideaccordianitem" role="button" tabindex="0" [attr.id]="'accordion-header-' + index"
+        [attr.aria-expanded]="accordionItem.expanded" [attr.aria-controls]="'accordion-body-' + index">
+        <div class="example-accordion-item-header" (click)="accordionItem.toggle(); getLessonDetails(lessonList.id)">
+          <p><strong> Lesson {{ lessonList.id }} </strong></p>
+          <span class="example-accordion-item-description">
+            <div *ngIf="accordionItem.expanded; else elseBlock"><i class="fa-solid fa-minus"></i></div>
+            <ng-template #elseBlock><i class="fa-solid fa-plus"></i></ng-template>
+          </span>
+        </div>
+        <div class="example-accordion-item-body" role="region" [style.display]="accordionItem.expanded ? '' : 'none'"
+          [attr.id]="'accordion-body-' + index" [attr.aria-labelledby]="'accordion-header-' + index">
+
+
+          <div *ngIf="submenu!== undefined; else elseBlock">
+            <!-- <div *ngFor = "let submenuList of submenu.video; let index = index "> -->
+            <div *ngIf="submenu.video!==undefined">
+              <a (click)='getLessonExcercises(index+1)' [routerLink]="['/lesson', {outlets:{'exercises':['video']}}]">
+                video </a>
+            </div>
+
+
+
+            <div *ngIf="submenu.mcq!== undefined ">
+              <a (click)='getLessonExcercises(index+1)' [routerLink]="['/lesson', {outlets:{'exercises':['mcq']}}]"> MCQ </a>
+            </div>
+            <div *ngIf="submenu.reading!== undefined ">
+              <a (click)='getLessonExcercises(index+1)' [routerLink]="['/lesson', {outlets:{'exercises':['reading']}}]"> Reading </a>
+            </div>
+            <div *ngIf="submenu.vocabulary!== undefined ">
+              <a (click)='getLessonExcercises(index+1)' [routerLink]="['/lesson', {outlets:{'exercises':['vocabulary']}}]"> Vocabulary </a>
+            </div>
+            <div *ngIf="submenu.fillInTheBlank!== undefined ">
+              <a (click)='getLessonExcercises(index+1)' [routerLink]="['/lesson', {outlets:{'exercises':['fillInTheBlank']}}]"> FillInTheBlank </a>
+            </div>
+
+          </div>
+          <ng-template #elseBlock>Unable to load lessons.</ng-template>
+        </div>
+      </cdk-accordion-item>
+    </cdk-accordion>
+
+    <div class="lesson" [style.display]="lessondisplay">
+      <strong>Select any lesson from sidemenu </strong>
+    </div>
+  </div>
+</body>
+</html>

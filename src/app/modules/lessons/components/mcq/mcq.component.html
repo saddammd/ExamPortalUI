@@ -1,0 +1,8 @@
+<div class="videoLesson">
+    <div *ngIf="lesson!== undefined; else elseBlock">
+        <div *ngFor = "let lessonvalues of lesson.mcq; let index = index ">
+            Lesson value is {{lessonvalues.question}}
+        </div>
+        </div>
+        <ng-template #elseBlock></ng-template> 
+    </div>
